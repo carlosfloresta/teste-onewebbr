@@ -1,0 +1,1 @@
+{"version":1,"defects":{"tests\\ApiTest::test_rotas_validas":4,"tests\\ApiTest::test_rotas_invalidas":4},"times":{"tests\\ApiTest::test_rotas_validas":0.018,"tests\\ApiTest::test_rotas_invalidas":0}}
