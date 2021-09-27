@@ -1,1 +1,1 @@
-{"version":1,"defects":{"tests\\ApiTest::test_rotas_validas":3,"tests\\ApiTest::test_rotas_invalidas":5},"times":{"tests\\ApiTest::test_rotas_validas":0.007,"tests\\ApiTest::test_rotas_invalidas":0}}
+{"version":1,"defects":{"tests\\ApiTest::test_rotas_validas":3,"tests\\ApiTest::test_rotas_invalidas":3},"times":{"tests\\ApiTest::test_rotas_validas":0.009,"tests\\ApiTest::test_rotas_invalidas":0.001}}
