@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Controllers\ValidarRotaController;
 
 class WebController extends Controller
 {
@@ -10,45 +11,23 @@ class WebController extends Controller
         echo $this->renderView('home');
     }
 
-    public function validar(array $estado)
+    public function validar(array $parametros)
     {
-        header('Content-type:application/json;charset=utf-8');
+        $estadosString = $parametros['estado'];
+        $estadoArray = explode(',', $estadosString);
+        //header('Content-type:application/json;charset=utf-8');
+        $validaRota = new ValidarRotaController;
+        $testaAPI = $validaRota->validarRota($estadoArray);
 
-        $estados = include '../estados.php';
-        $estadoArray = explode(',', strtoupper($estado['estado']));
 
-        if (empty($estadoArray) || count($estadoArray) < 2) {
-            $result = false;
+        if(!$testaAPI) {
+            echo json_encode(array("codigo" => 400, "mensagem" => "Dados recebidos invalidos!", "isValida" => false));
+            return;
         }
 
-        for ($i = 1; $i < count($estadoArray); $i++) {
-
-            $estadosKey = array_keys($estados);
-            $comparaEstados = array_search($estadoArray[$i - 1], $estadosKey);
-
-            if ($comparaEstados !== false) {
-                $comparaNovamente = $estados[$estadosKey[$comparaEstados]];
-                if (array_search($estadoArray[$i], $comparaNovamente) !== false) {
-                    $result = true;
-                } else {
-                    $result = false;
-                    break;
-                }
-            } else {
-
-                $result = 400;
-                break;
-            }
-        }
-
-        $estadoString = $estado['estado'];
-        $estadoString = strtoupper($estadoString);
-
-        if ($result === true || $result === false) {
-            echo json_encode(array("rota" => URL_BASE . "/trajeto/validar/$estadoString", "isValida" => $result));
-        } elseif ($result === 400) {
-            echo json_encode(array("codigo" => $result, "mensagem" => "Dados recebidos invalidos!"));
-        }
+        $estadoString = strtoupper($estadosString);
+        echo json_encode(array("rota" => URL_BASE . "/trajeto/validar/$estadosString", "isValida" => true));
+        
     }
 
     public function error(array $data): void
@@ -58,28 +37,5 @@ class WebController extends Controller
     }
 
 
-    public function testaAPI(array $estadoArray)
-    {
-
-        $estados = include 'estados.php';
-        if (empty($estadoArray) || count($estadoArray) < 2) {
-            return false;
-        }
-
-        for ($i = 1; $i < count($estadoArray); $i++) {
-
-            $keyEstados = array_keys($estados);
-            $comparaEstados = array_search($estadoArray[$i - 1], $keyEstados);
-
-            if ($comparaEstados !== false) {
-                if (array_search($estadoArray[$i], $estados[$keyEstados[$comparaEstados]]) !== false) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
+  
 }

@@ -17,11 +17,9 @@
     },
     "scripts": {
         "test": [
-            "Composer\\Config::disableProcessTimeout",
             "phpunit tests/"
         ],
         "stan": [
-            "Composer\\Config::disableProcessTimeout",
             "phpstan analyse"
         ]
     }

@@ -23,6 +23,10 @@ class ComposerStaticInit5790a485905d5d9bea3f1591b050db24
     );
 
     public static $prefixLengthsPsr4 = array (
+        't' => 
+        array (
+            'tests\\' => 6,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -60,6 +64,10 @@ class ComposerStaticInit5790a485905d5d9bea3f1591b050db24
     );
 
     public static $prefixDirsPsr4 = array (
+        'tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
